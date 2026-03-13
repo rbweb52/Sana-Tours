@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sana Tours & Travels - Premium Hajj & Umrah Services. 25+ Years of Excellence">
+    <title>Sana Tours & Travels | Premium Hajj & Umrah Services</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animate On Scroll -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <style>
+        /* ============ PREMIUM CSS VARIABLES ============ */
+        :root {
+            --primary: #0f4332; /* Deep Rich Emerald */
+            --secondary: #d4af37; /* Classic Gold */
+            --accent: #f3e5ab; /* Pale Gold (Backgrounds) */
+            --dark: #092618;
+            --light: #f8fdfb;
+            --text: #2c2c2c;
+            --light-text: #555;
+            --border-color: #e0e0e0;
+            
+            /* Premium Shadows */
+            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --gold-glow: 0 5px 25px rgba(212, 175, 55, 0.4);
+            
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.8; /* More breathing room for text */
+        }
+
+        /* Premium Pattern Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(var(--accent) 1px, transparent 1px),
+                radial-gradient(var(--accent) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; font-weight: 700; line-height: 1.3; }
+        img { max-width: 100%; height: auto; }
+        a { text-decoration: none; transition: var(--transition); }
+
+        /* ============ PRELOADER ============ */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--primary);
+            z-index: 9999; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; gap: 30px;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.loaded { opacity: 0; visibility: hidden; }
+        .spinner {
+            width: 80px; height: 80px;
+            border: 2px solid transparent;
+            border-top-color: var(--secondary); border-bottom-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+        .preloader-text { font-size: 1.2rem; letter-spacing: 3px; font-weight: 500; color: #fff; text-transform: uppercase; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ============ NAVIGATION ============ */
+        .navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            background: transparent; transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05); 
+            padding: 15px 5%;
+        }
+        .logo {
+            font-family: 'Amiri', serif; font-size: 2rem; font-weight: 700;
+            color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .navbar.scrolled .logo { color: var(--primary); text-shadow: none; }
+        .logo-icon {
+            width: 50px; height: 50px; background: linear-gradient(135deg, var(--secondary), #F4C430);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; color: var(--dark); font-weight: 700; box-shadow: var(--gold-glow);
+        }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { color: #fff; font-weight: 500; position: relative; font-size: 0.95rem; }
+        .navbar.scrolled .nav-links a { color: var(--text); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px;
+            background: linear-gradient(90deg, var(--secondary), #F4C430);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-btn {
+            background: transparent; 
+            border: 2px solid #fff;
+            color: #fff; padding: 12px 30px; border-radius: 50px;
+            font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+        .navbar.scrolled .nav-btn { 
+            border-color: var(--secondary); 
+            color: var(--primary); 
+        }
+        .nav-btn:hover { 
+            background: var(--secondary); 
+            border-color: var(--secondary); 
+            color: var(--dark); 
+            transform: translateY(-2px); 
+            box-shadow: var(--gold-glow);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
+        .menu-toggle span { width: 25px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
+        .navbar.scrolled .menu-toggle span { background: var(--text); }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            position: relative; height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; 
+        }
+        .hero-slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center; opacity: 0;
+            transform: scale(1.1);
+            animation: slideShow 18s infinite; /* Slower, more elegant */
+        }
+
+        /* Using Your Provided Images */
+        .hero-slide:nth-child(1) {
+            background-image: url('https://z-cdn-media.chatglm.cn/files/e5211d11-7b85-44c6-b6c6-48509862d8fb.jpg?auth_key=1873381457-ed5833791ac542b9ba14edd8d98dc4ae-0-991247f38b421058a700685d33cb7f80');
+            animation-delay: 0s;
+        }
+        .hero-slide:nth-child(2) {
+            background-image: url('https://z-cdn-media.chatglm.cn/files/7769c1cf-4727-44bd-b785-a10a23b8daca.jpg?auth_key=1873381457-f39418fa5ab547e9a3cc37b73c01675a-0-9386b8b5d8a5d085096e235dee8dc50a');
+            animation-delay: 6s;
+        }
+        .hero-slide:nth-child(3) {
+            background-image: url('https://z-cdn-media.chatglm.cn/files/0068eecf-7bbd-42c9-a557-75fec0f92e5f.jpg?auth_key=1873381457-c36cb850ea304f08979b69eb3344766d-0-56ea5fbd4d2d660c374c40ba4a0fc895');
+            animation-delay: 12s;
+        }
+
+        @keyframes slideShow {
+            0% { opacity: 0; transform: scale(1.1); }
+            5% { opacity: 1; transform: scale(1); }
+            30% { opacity: 1; }
+            35% { opacity: 0; transform: scale(1); }
+            100% { opacity: 0; }
+        }
+
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(15, 67, 50, 0.85) 0%, rgba(9, 38, 24, 0.6) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative; z-index: 3; text-align: center; color: #fff;
+            max-width: 1000px; padding: 0 20px; 
+            animation: heroFadeIn 1s ease-out;
+        }
+        
+        .hero-badge {
+            display: inline-block; 
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(243, 229, 171, 0.1));
+            border: 1px solid var(--secondary); color: #fff;
+            padding: 10px 30px; border-radius: 50px; margin-bottom: 30px;
+            font-size: 0.85rem; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .hero-content h1 { 
+            font-size: 5rem; 
+            margin-bottom: 20px; 
+            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            line-height: 1.1;
+        }
+        
+        .hero-content p { 
+            font-size: 1.4rem; 
+            max-width: 700px; 
+            margin: 0 auto 50px; 
+            opacity: 0.9; 
+            font-weight: 300;
+        }
+        
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            padding: 18px 45px; border-radius: 50px; font-size: 1rem;
+            font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
+            display: inline-flex; align-items: center; gap: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--secondary), #F4C430); 
+            color: var(--dark); 
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); 
+        }
+        .btn-primary:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); 
+        }
+        
+        .btn-secondary { 
+            background: transparent; 
+            border: 2px solid rgba(255,255,255,0.8); 
+            color: #fff; 
+        }
+        .btn-secondary:hover { 
+            background: #fff; 
+            color: var(--primary); 
+            border-color: #fff;
+        }
+
+        /* Floating Booking Form - Premium Glass Look */
+        .booking-form-container {
+            position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
+            width: 95%; max-width: 1200px; z-index: 4;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 40px; border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .form-group { flex: 1; min-width: 200px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .form-control {
+            width: 100%; padding: 15px 20px; border: 2px solid transparent;
+            background: #fff;
+            border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        .form-control:focus { outline: none; border-color: var(--secondary); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15); }
+        
+        .btn-submit {
+            padding: 15px 45px; background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: #fff; border: none; border-radius: 10px; font-weight: 700;
+            cursor: pointer; font-size: 1rem; transition: var(--transition); height: 54px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+
+        /* ============ SECTIONS ============ */
+        section { padding: 100px 5%; position: relative; }
+        
+        .section-title { text-align: center; margin-bottom: 80px; }
+        .section-title h2 { font-size: 3.5rem; color: var(--primary); position: relative; display: inline-block; padding-bottom: 20px; margin-bottom: 15px; }
+        .section-title h2::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 4px; background: linear-gradient(90deg, transparent, var(--secondary), transparent); border-radius: 2px;
+        }
+        .section-title p { color: var(--light-text); font-size: 1.2rem; max-width: 700px; margin: 0 auto; font-weight: 300; }
+
+        /* ============ ABOUT SECTION ============ */
+        .about-section { display: flex; align-items: center; gap: 80px; flex-wrap: wrap; background: #fff; }
+        .about-image { flex: 1; min-width: 300px; position: relative; }
+        .about-image img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); border: 5px solid #fff; }
+        .about-image::before { 
+            content: ''; position: absolute; top: -20px; left: -20px; width: 100%; height: 100%; 
+            border: 2px solid var(--secondary); border-radius: 20px; z-index: -1; 
+        }
+        .about-content { flex: 1; min-width: 300px; }
+        .about-content h2 { font-size: 3rem; color: var(--primary); margin-bottom: 30px; }
+        .about-content p { color: var(--light-text); margin-bottom: 25px; font-size: 1.1rem; line-height: 1.9; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
+        .stat-card { background: #fff; padding: 30px; border-radius: 15px; text-align: center; box-shadow: var(--shadow-md); transition: var(--transition); border-top: 3px solid transparent; }
+        .stat-card:hover { transform: translateY(-10px); border-top-color: var(--secondary); }
+        .stat-number { font-size: 3rem; color: var(--secondary); font-weight: 700; font-family: 'Amiri', serif; }
+        .stat-label { color: var(--primary); font-size: 1rem; margin-top: 5px; font-weight: 600; }
+
+        /* ============ SERVICES SECTION ============ */
+        .services-section { background: var(--light); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .service-card {
+            background: #fff; padding: 50px 35px; text-align: center; border-radius: 20px;
+            box-shadow: var(--shadow-sm); transition: var(--transition); position: relative; overflow: hidden;
+            border-bottom: 5px solid transparent;
+        }
+        .service-card:hover { transform: translateY(-15px); border-bottom-color: var(--secondary); box-shadow: var(--shadow-lg); }
+        .service-icon { font-size: 4rem; color: var(--primary); margin-bottom: 25px; transition: var(--transition); display: inline-block; }
+        .service-card:hover .service-icon { color: var(--secondary); transform: rotateY(180deg); }
+        .service-card h3 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; }
+        .service-card p { color: var(--light-text); line-height: 1.8; }
+
+        /* ============ PACKAGES SECTION ============ */
+        .packages-section { background: #fff; }
+        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .package-card {
+            background: #fff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);
+            transition: var(--transition); position: relative;
+        }
+        .package-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: var(--shadow-lg); }
+        .package-header {
+            background: var(--primary);
+            color: #fff; padding: 40px 25px; text-align: center; position: relative; overflow: hidden;
+        }
+        .package-badge {
+            display: inline-block; background: #fff; color: var(--primary);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.8rem;
+            font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .package-header h3 { color: #fff; font-size: 2.2rem; margin: 10px 0; }
+        .package-duration { font-size: 1rem; opacity: 0.9; }
+        
+        .package-body { padding: 40px; }
+        .package-price { font-size: 2.8rem; color: var(--primary); font-weight: 700; margin-bottom: 30px; font-family: 'Amiri', serif; }
+        .package-price span { font-size: 1.2rem; color: var(--light-text); font-family: 'Poppins', sans-serif; font-weight: 400; }
+        
+        .features { list-style: none; margin-bottom: 30px; }
+        .features li {
+            padding: 15px 0; border-bottom: 1px solid #eee;
+            color: var(--text); display: flex; align-items: center; gap: 15px;
+        }
+        .features i { color: var(--secondary); font-size: 1.2rem; }
+
+        /* ============ TESTIMONIALS SECTION ============ */
+        .testimonials-section { background: var(--light); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .testimonial-card {
+            background: #fff; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-sm);
+            transition: var(--transition); position: relative;
+        }
+        .testimonial-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
+        .quote-icon { position: absolute; top: 30px; right: 40px; font-size: 4rem; color: rgba(212, 175, 55, 0.1); margin-bottom: 0; }
+        .star-rating { color: var(--secondary); margin-bottom: 20px; font-size: 1.2rem; }
+        .testimonial-text { color: var(--light-text); font-size: 1.1rem; margin-bottom: 30px; line-height: 1.9; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 20px; }
+        .author-avatar {
+            width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: #fff; font-weight: 700; font-size: 1.4rem;
+        }
+
+        /* ============ FOOTER ============ */
+        footer { background: var(--dark); color: #fff; padding: 80px 5% 40px; position: relative; }
+        footer::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--secondary), #F4C430, var(--secondary));
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-bottom: 60px; }
+        .footer-col h3 { color: #fff; margin-bottom: 30px; font-size: 1.5rem; }
+        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); margin-bottom: 15px; display: block; }
+        .footer-col a:hover { color: var(--secondary); padding-left: 8px; }
+        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 40px; text-align: center; color: rgba(255,255,255,0.5); }
+        .social-icons { display: flex; gap: 20px; margin-top: 30px; }
+        .social-icons a {
+            width: 50px; height: 50px; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem;
+        }
+        .social-icons a:hover { background: var(--secondary); border-color: var(--secondary); color: var(--dark); }
+
+        /* ============ FLOATING BUTTONS ============ */
+        .whatsapp-btn {
+            position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
+            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 2.2rem; z-index: 999; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            animation: pulse-wp 2s infinite;
+        }
+        @keyframes pulse-wp {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .back-to-top {
+            position: fixed; bottom: 40px; right: 115px; width: 55px; height: 55px;
+            background: var(--primary); border: none;
+            border-radius: 50%; color: #fff; font-size: 1.2rem; cursor: pointer;
+            z-index: 999; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transition: var(--transition);
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--secondary); color: var(--dark); }
+
+        /* ============ MODAL ============ */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center;
+            align-items: center; backdrop-filter: blur(10px);
+        }
+        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+        .modal-content {
+            background: #fff; padding: 60px; border-radius: 25px; width: 90%;
+            max-width: 550px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+        .close-btn {
+            position: absolute; top: 20px; right: 25px; background: none;
+            border: none; font-size: 2.5rem; color: #ccc; cursor: pointer; transition: var(--transition);
+        }
+        .close-btn:hover { color: var(--primary); transform: rotate(90deg); }
+        .modal h2 { color: var(--primary); margin-bottom: 30px; font-size: 2.2rem; text-align: center; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: #fff; flex-direction: column; padding: 30px; gap: 20px;
+                box-shadow: var(--shadow-lg); border-radius: 0 0 20px 20px;
+            }
+            .nav-links.active { display: flex; }
+            .navbar.scrolled .nav-links a, .nav-links a { color: var(--text); }
+            .menu-toggle { display: flex; }
+            
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1.1rem; }
+            .booking-form-container { 
+                position: relative; bottom: auto; transform: translateX(0); 
+                margin-top: -80px; border-radius: 20px;
+                padding: 30px; 
+            }
+            .btn-submit { width: 100%; }
+            
+            .stats-grid { grid-template-columns: 1fr; }
+            .section-title h2 { font-size: 2.5rem; }
+            
+            .whatsapp-btn { width: 55px; height: 55px; font-size: 1.8rem; bottom: 20px; right: 20px; }
+            .back-to-top { bottom: 20px; right: 85px; width: 50px; height: 50px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="spinner"></div>
+            <p class="preloader-text">Preparing Your Journey</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#home" class="logo">
+            <div class="logo-icon">☪</div>
+            <span>Sana Tours</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-btn" onclick="openBookingModal()">Book Now</button>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <span class="hero-badge">Established Since 1998</span>
+            <h1>Your Sacred Journey<br>Of A Lifetime</h1>
+            <p>Experience the spiritual fulfillment of Hajj & Umrah with 25+ years of premier service and dedication.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="openBookingModal()">
+                    <i class="fas fa-paper-plane"></i> Start Your Journey
+                </button>
+                <button class="btn btn-secondary" onclick="document.getElementById('packages').scrollIntoView()">
+                    <i class="fas fa-eye"></i> View Packages
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Booking Form -->
+        <div class="booking-form-container">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-control" placeholder="Enter Your Name">
+            </div>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" class="form-control" placeholder="+92 300 XXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>Package Type</label>
+                <select class="form-control">
+                    <option>Select Package</option>
+                    <option>Hajj Package</option>
+                    <option>Umrah Package</option>
+                    <option>Ramzan Special</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn-submit">Send Inquiry</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-image" data-aos="fade-right">
+            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&h=700&fit=crop" alt="Pilgrims">
+        </div>
+        <div class="about-content" data-aos="fade-left">
+            <h2>Why Choose Sana Tours?</h2>
+            <p>With a legacy spanning over two decades, Sana Tours & Travels stands as a beacon of trust and excellence in pilgrimage services. We are a government-authorized agency committed to transforming your spiritual journey into a seamless, comfortable, and memorable experience.</p>
+            <p>Our dedicated team handles every intricate detail—from visa documentation to premium accommodation—allowing you to focus solely on your spiritual devotion.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card" data-aos="fade-up">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number">15K+</div>
+                    <div class="stat-label">Happy Pilgrims</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <div class="section-title" data-aos="fade-down">
+            <h2>Our Premium Services</h2>
+            <p>Comprehensive pilgrimage solutions designed for your comfort and peace of mind</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up">
+                <i class="fas fa-passport service-icon"></i>
+                <h3>Visa Processing</h3>
+                <p>100% success rate with expert documentation handling and government liaison.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-concierge-bell service-icon"></i>
+                <h3>5-Star Accommodation</h3>
+                <p>Premium hotels within walking distance of the Haram for maximum convenience.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-plane-departure service-icon"></i>
+                <h3>Flight Booking</h3>
+                <p>Direct flights from major cities with optimal schedules and comfort.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-book-quran service-icon"></i>
+                <h3>Religious Guidance</h3>
+                <p>Accompanied by renowned Islamic scholars for spiritual enrichment.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-bus-alt service-icon"></i>
+                <h3>Ground Transport</h3>
+                <p>Luxury AC coaches and private vehicles for all transit needs.</p>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <i class="fas fa-headset service-icon"></i>
+                <h3>24/7 Support</h3>
+                <p>Dedicated support team available around the clock for assistance.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="packages-section">
+        <div class="section-title" data-aos="fade-down">
+            <h2>Exclusive Packages</h2>
+            <p>Curated pilgrimage experiences tailored to your preferences</p>
+        </div>
+        <div class="packages-grid">
+            <!-- Silver Package -->
+            <div class="package-card" data-aos="fade-up">
+                <div class="package-header" style="background: linear-gradient(135deg, #3a3a3a, #1a1a1a);">
+                    <span class="package-badge">Economy</span>
+                    <h3>Silver Umrah</h3>
+                    <div class="package-duration">14 Days</div>
+                </div>
+                <div class="package-body">
+                    <div class="package-price">PKR 350,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> 3-Star Hotel Near Haram</li>
+                        <li><i class="fas fa-check"></i> Breakfast Included</li>
+                        <li><i class="fas fa-check"></i> Group Transport</li>
+                        <li><i class="fas fa-check"></i> Islamic Scholar Guide</li>
+                        <li><i class="fas fa-check"></i> Visa Assistance</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                </div>
+            </div>
+
+            <!-- Gold Package -->
+            <div class="package-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="package-header">
+                    <span class="package-badge" style="background: var(--secondary); color: #000;">Recommended</span>
+                    <h3>Gold Hajj</h3>
+                    <div class="package-duration">30 Days</div>
+                </div>
+                <div class="package-body">
+                    <div class="package-price">PKR 1,200,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> 5-Star Hotel (Haram View)</li>
+                        <li><i class="fas fa-check"></i> All Meals Included</li>
+                        <li><i class="fas fa-check"></i> Direct Flights</li>
+                        <li><i class="fas fa-check"></i> Senior Scholar Guide</li>
+                        <li><i class="fas fa-check"></i> Complete Ziarat Tours</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                </div>
+            </div>
+
+            <!-- Platinum Package -->
+            <div class="package-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="package-header" style="background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);">
+                    <span class="package-badge" style="background: #000; color: #fff;">Luxury</span>
+                    <h3 style="color: #000;">Platinum Hajj</h3>
+                    <div class="package-duration" style="color: #333;">35 Days</div>
+                </div>
+                <div class="package-body">
+                    <div class="package-price">PKR 1,800,000</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Luxury 5-Star Suites</li>
+                        <li><i class="fas fa-check"></i> Gourmet Dining</li>
+                        <li><i class="fas fa-check"></i> Private VIP Transport</li>
+                        <li><i class="fas fa-check"></i> Personal Scholar</li>
+                        <li><i class="fas fa-check"></i> VIP Ziarat Experiences</li>
+                    </ul>
+                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="section-title" data-aos="fade-down">
+            <h2>Pilgrim Experiences</h2>
+            <p>Hear from our valued travelers about their spiritual journeys</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card" data-aos="fade-up">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="star-rating">★★★★★</div>
+                <p class="testimonial-text">"Alhamdulillah, Sana Tours made our Hajj journey absolutely seamless. The arrangements were impeccable, and the scholars were incredibly knowledgeable."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MA</div>
+                    <div class="author-info"><h4>Muhammad Ahmed</h4><p>Hajj 2023</p></div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="star-rating">★★★★★</div>
+                <p class="testimonial-text">"Our family Umrah trip was perfectly organized. The hotel was walking distance from Haram, and the staff was always available for assistance."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">FK</div>
+                    <div class="author-info"><h4>Fatima Khan</h4><p>Umrah 2024</p></div>
+                </div>
+            </div>
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <div class="star-rating">★★★★★</div>
+                <p class="testimonial-text">"The Ramzan Umrah package exceeded all expectations. The night prayers in Haram were spiritually uplifting and transformative."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AR</div>
+                    <div class="author-info"><h4>Abdul Rahman</h4><p>Ramzan 2024</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sana Tours & Travels</h3>
+                <p>Government Authorized Agent providing premium pilgrimage services with dedication and excellence since 1998.</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#packages">Packages</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Plaza, Main Boulevard, Lahore</p>
+                <p><i class="fas fa-phone"></i> +92 300 1234567</p>
+                <p><i class="fas fa-envelope"></i> info@sanatours.pk</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Sana Tours & Travels. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/923001234567" class="whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeBookingModal()">&times;</button>
+            <h2>Book Your Journey</h2>
+            <form onsubmit="submitBooking(event)">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" class="form-control" placeholder="Your Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" class="form-control" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" class="form-control" placeholder="+92 300 XXXXXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>Package Type *</label>
+                    <select class="form-control" required>
+                        <option value="">Select a package</option>
+                        <option value="silver">Silver Umrah - PKR 350,000</option>
+                        <option value="gold">Gold Hajj - PKR 1,200,000</option>
+                        <option value="platinum">Platinum Hajj - PKR 1,800,000</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                    Submit Inquiry
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- AOS Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1200, // Slower, more elegant animations
+            offset: 100,
+            once: true
+        });
+
+        // Preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                setTimeout(() => { // Slight delay for effect
+                    preloader.classList.add('loaded');
+                }, 500);
+            }
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to Top Button Visibility
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Scroll to Top Function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Modal Controls
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        document.getElementById('bookingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeBookingModal();
+            }
+        });
+
+        // Form Submission Handler
+        function submitBooking(event) {
+            event.preventDefault();
+            alert('Thank you for your inquiry! We will contact you shortly to confirm your sacred journey.');
+            closeBookingModal();
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
