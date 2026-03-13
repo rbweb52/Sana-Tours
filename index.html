@@ -7,80 +7,210 @@
     <title>Sana Tours & Travels | Premium Hajj & Umrah Services</title>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animate On Scroll -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
     <style>
-        /* ============ PREMIUM CSS VARIABLES ============ */
+        /* ============ ULTRA PREMIUM CSS VARIABLES ============ */
         :root {
-            --primary: #0f4332; /* Deep Rich Emerald */
-            --secondary: #d4af37; /* Classic Gold */
-            --accent: #f3e5ab; /* Pale Gold (Backgrounds) */
-            --dark: #092618;
-            --light: #f8fdfb;
-            --text: #2c2c2c;
-            --light-text: #555;
-            --border-color: #e0e0e0;
+            --primary: #0a3d2e;
+            --primary-light: #1a5a45;
+            --secondary: #c9a227;
+            --secondary-light: #e8c547;
+            --accent: #f5f0e1;
+            --dark: #071a14;
+            --darker: #040d0a;
+            --light: #fdfcfa;
+            --text: #1a1a1a;
+            --light-text: #4a4a4a;
+            --muted: #8a8a8a;
+            --border-color: rgba(201, 162, 39, 0.3);
+            
+            /* Premium Gradients */
+            --gradient-gold: linear-gradient(135deg, #c9a227 0%, #e8c547 50%, #c9a227 100%);
+            --gradient-dark: linear-gradient(135deg, #0a3d2e 0%, #071a14 100%);
+            --gradient-royal: linear-gradient(135deg, #0a3d2e 0%, #1a5a45 50%, #0a3d2e 100%);
             
             /* Premium Shadows */
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
-            --gold-glow: 0 5px 25px rgba(212, 175, 55, 0.4);
+            --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.16);
+            --shadow-gold: 0 8px 32px rgba(201, 162, 39, 0.25);
+            --shadow-gold-lg: 0 16px 48px rgba(201, 162, 39, 0.35);
             
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            
+            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-slow: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #fff;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light);
             color: var(--text);
             overflow-x: hidden;
-            line-height: 1.8; /* More breathing room for text */
+            line-height: 1.7;
         }
 
-        /* Premium Pattern Background */
-        body::before {
-            content: '';
+        /* ============ CUSTOM CURSOR ============ */
+        .cursor {
+            width: 12px; height: 12px;
+            background: var(--secondary);
+            border-radius: 50%;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(var(--accent) 1px, transparent 1px),
-                radial-gradient(var(--accent) 1px, transparent 1px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
-            z-index: -1;
-            opacity: 0.3;
+            pointer-events: none;
+            z-index: 99999;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+            mix-blend-mode: difference;
+        }
+        .cursor-follower {
+            width: 40px; height: 40px;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+        .cursor.hover { transform: scale(2); }
+        .cursor-follower.hover { 
+            width: 60px; height: 60px; 
+            border-color: var(--secondary-light);
         }
 
-        h1, h2, h3, h4, h5, h6 { font-family: 'Amiri', serif; font-weight: 700; line-height: 1.3; }
-        img { max-width: 100%; height: auto; }
-        a { text-decoration: none; transition: var(--transition); }
+        /* ============ SCROLL PROGRESS BAR ============ */
+        .scroll-progress {
+            position: fixed;
+            top: 0; left: 0;
+            width: 0%; height: 3px;
+            background: var(--gradient-gold);
+            z-index: 10001;
+            transition: width 0.1s ease-out;
+        }
 
         /* ============ PRELOADER ============ */
         #preloader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--primary);
+            background: var(--darker);
             z-index: 9999; display: flex; justify-content: center; align-items: center;
-            flex-direction: column; gap: 30px;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            flex-direction: column; gap: 40px;
+            transition: opacity 1s ease, visibility 1s ease;
         }
-        #preloader.loaded { opacity: 0; visibility: hidden; }
-        .spinner {
-            width: 80px; height: 80px;
-            border: 2px solid transparent;
-            border-top-color: var(--secondary); border-bottom-color: var(--secondary);
+        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+        
+        .preloader-logo {
+            width: 120px; height: 120px;
+            border: 3px solid var(--secondary);
             border-radius: 50%;
-            animation: spin 1.5s linear infinite;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            animation: pulse-preloader 2s ease-in-out infinite;
         }
-        .preloader-text { font-size: 1.2rem; letter-spacing: 3px; font-weight: 500; color: #fff; text-transform: uppercase; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .preloader-logo::before {
+            content: '';
+            position: absolute; width: 100%; height: 100%;
+            border: 2px solid var(--secondary);
+            border-radius: 50%;
+            animation: ripple 1.5s ease-out infinite;
+        }
+        .preloader-logo span {
+            font-family: 'Amiri', serif; font-size: 3rem;
+            color: var(--secondary);
+        }
+        
+        .preloader-text {
+            font-size: 0.85rem; letter-spacing: 6px;
+            font-weight: 500; color: var(--secondary);
+            text-transform: uppercase; opacity: 0.8;
+        }
+        
+        .preloader-bar {
+            width: 200px; height: 2px;
+            background: rgba(201, 162, 39, 0.2);
+            border-radius: 2px; overflow: hidden;
+        }
+        .preloader-bar-fill {
+            width: 0%; height: 100%;
+            background: var(--secondary);
+            animation: loading 2s ease-in-out forwards;
+        }
+        
+        @keyframes pulse-preloader {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        /* ============ PREMIUM DECORATIVE PATTERNS ============ */
+        .pattern-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='none' stroke='%23c9a227' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+        }
+
+        /* ============ PREMIUM SECTION BORDERS ============ */
+        .section-border {
+            position: absolute;
+            pointer-events: none;
+        }
+        .section-border.top {
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+        .section-border.bottom {
+            bottom: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+
+        /* Decorative Corner Elements */
+        .corner-decoration {
+            position: absolute;
+            width: 100px; height: 100px;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+        .corner-decoration svg {
+            width: 100%; height: 100%;
+        }
+        .corner-decoration.top-left { top: 20px; left: 20px; }
+        .corner-decoration.top-right { top: 20px; right: 20px; transform: rotate(90deg); }
+        .corner-decoration.bottom-left { bottom: 20px; left: 20px; transform: rotate(-90deg); }
+        .corner-decoration.bottom-right { bottom: 20px; right: 20px; transform: rotate(180deg); }
+
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Playfair Display', serif; 
+            font-weight: 600; 
+            line-height: 1.2; 
+            letter-spacing: -0.02em;
+        }
+        img { max-width: 100%; height: auto; }
+        a { text-decoration: none; transition: var(--transition); }
 
         /* ============ NAVIGATION ============ */
         .navbar {
@@ -89,373 +219,1109 @@
             background: transparent; transition: var(--transition);
         }
         .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.05); 
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05); 
             padding: 15px 5%;
         }
+        
         .logo {
-            font-family: 'Amiri', serif; font-size: 2rem; font-weight: 700;
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700;
             color: #fff; text-decoration: none; display: flex; align-items: center; gap: 15px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        .navbar.scrolled .logo { color: var(--primary); text-shadow: none; }
+        .navbar.scrolled .logo { color: var(--primary); }
+        
         .logo-icon {
-            width: 50px; height: 50px; background: linear-gradient(135deg, var(--secondary), #F4C430);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; color: var(--dark); font-weight: 700; box-shadow: var(--gold-glow);
+            width: 48px; height: 48px;
+            background: var(--gradient-gold);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--dark);
+            box-shadow: var(--shadow-gold);
+            position: relative;
+            overflow: hidden;
         }
+        .logo-icon::before {
+            content: '';
+            position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+            animation: logoShine 3s ease-in-out infinite;
+        }
+        @keyframes logoShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
+        }
+        
         .nav-links { display: flex; gap: 40px; list-style: none; }
-        .nav-links a { color: #fff; font-weight: 500; position: relative; font-size: 0.95rem; }
-        .navbar.scrolled .nav-links a { color: var(--text); }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -8px; left: 0; width: 0; height: 2px;
-            background: linear-gradient(90deg, var(--secondary), #F4C430);
-            transition: width 0.3s ease;
+        .nav-links a { 
+            color: rgba(255,255,255,0.9); 
+            font-weight: 500; 
+            position: relative; 
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            padding: 5px 0;
         }
-        .nav-links a:hover::after { width: 100%; }
+        .navbar.scrolled .nav-links a { color: var(--text); }
+        .nav-links a::before {
+            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+            background: var(--secondary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-links a:hover::before { width: 100%; }
 
         .nav-btn {
             background: transparent; 
-            border: 2px solid #fff;
-            color: #fff; padding: 12px 30px; border-radius: 50px;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            color: #fff; padding: 12px 28px; border-radius: 50px;
             font-weight: 600; cursor: pointer; transition: var(--transition);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
         .navbar.scrolled .nav-btn { 
             border-color: var(--secondary); 
             color: var(--primary); 
         }
+        .nav-btn::before {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--gradient-gold);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        .nav-btn:hover::before { left: 0; }
         .nav-btn:hover { 
-            background: var(--secondary); 
             border-color: var(--secondary); 
             color: var(--dark); 
-            transform: translateY(-2px); 
-            box-shadow: var(--gold-glow);
         }
 
         /* Mobile Menu */
-        .menu-toggle { display: none; flex-direction: column; gap: 6px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 1001; }
-        .menu-toggle span { width: 25px; height: 2px; background: #fff; border-radius: 2px; transition: var(--transition); }
+        .menu-toggle { 
+            display: none; 
+            flex-direction: column; 
+            gap: 6px; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+            padding: 10px; 
+            z-index: 1001; 
+        }
+        .menu-toggle span { 
+            width: 24px; height: 2px; 
+            background: #fff; 
+            border-radius: 2px; 
+            transition: var(--transition); 
+            transform-origin: center;
+        }
         .navbar.scrolled .menu-toggle span { background: var(--text); }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         /* ============ HERO SECTION ============ */
         .hero {
-            position: relative; height: 100vh; width: 100%;
+            position: relative; height: 100vh; min-height: 700px; width: 100%;
             display: flex; align-items: center; justify-content: center;
-            overflow: hidden; 
+            overflow: hidden;
+        }
+        
+        .hero-slides {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         }
         .hero-slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center; opacity: 0;
-            transform: scale(1.1);
-            animation: slideShow 18s infinite; /* Slower, more elegant */
+            transform: scale(1.05);
+            animation: slideShow 20s infinite;
         }
 
-        /* Using Your Provided Images */
         .hero-slide:nth-child(1) {
-            background-image: url('https://z-cdn-media.chatglm.cn/files/e5211d11-7b85-44c6-b6c6-48509862d8fb.jpg?auth_key=1873381457-ed5833791ac542b9ba14edd8d98dc4ae-0-991247f38b421058a700685d33cb7f80');
+            background-image: url('https://images.unsplash.com/photo-1564507592333-c60657eea523?w=1920&q=80');
             animation-delay: 0s;
         }
         .hero-slide:nth-child(2) {
-            background-image: url('https://z-cdn-media.chatglm.cn/files/7769c1cf-4727-44bd-b785-a10a23b8daca.jpg?auth_key=1873381457-f39418fa5ab547e9a3cc37b73c01675a-0-9386b8b5d8a5d085096e235dee8dc50a');
-            animation-delay: 6s;
+            background-image: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&q=80');
+            animation-delay: 5s;
         }
         .hero-slide:nth-child(3) {
-            background-image: url('https://z-cdn-media.chatglm.cn/files/0068eecf-7bbd-42c9-a557-75fec0f92e5f.jpg?auth_key=1873381457-c36cb850ea304f08979b69eb3344766d-0-56ea5fbd4d2d660c374c40ba4a0fc895');
-            animation-delay: 12s;
+            background-image: url('https://images.unsplash.com/photo-1537031934600-0bf3e22deb38?w=1920&q=80');
+            animation-delay: 10s;
+        }
+        .hero-slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=1920&q=80');
+            animation-delay: 15s;
         }
 
         @keyframes slideShow {
-            0% { opacity: 0; transform: scale(1.1); }
+            0% { opacity: 0; transform: scale(1.05); }
             5% { opacity: 1; transform: scale(1); }
-            30% { opacity: 1; }
-            35% { opacity: 0; transform: scale(1); }
+            20% { opacity: 1; }
+            25% { opacity: 0; transform: scale(0.98); }
             100% { opacity: 0; }
         }
 
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(15, 67, 50, 0.85) 0%, rgba(9, 38, 24, 0.6) 100%);
+            background: linear-gradient(160deg, rgba(10, 61, 46, 0.92) 0%, rgba(7, 26, 20, 0.75) 50%, rgba(10, 61, 46, 0.85) 100%);
             z-index: 2;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 2; overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 15s infinite;
+        }
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
         .hero-content {
             position: relative; z-index: 3; text-align: center; color: #fff;
-            max-width: 1000px; padding: 0 20px; 
-            animation: heroFadeIn 1s ease-out;
+            max-width: 900px; padding: 0 20px;
         }
         
         .hero-badge {
-            display: inline-block; 
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(243, 229, 171, 0.1));
-            border: 1px solid var(--secondary); color: #fff;
-            padding: 10px 30px; border-radius: 50px; margin-bottom: 30px;
-            font-size: 0.85rem; font-weight: 600; letter-spacing: 3px;
+            display: inline-flex; align-items: center; gap: 12px;
+            background: rgba(201, 162, 39, 0.1);
+            border: 1px solid rgba(201, 162, 39, 0.4);
+            color: var(--secondary-light);
+            padding: 12px 28px; border-radius: 50px; margin-bottom: 35px;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 3px;
             text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
         }
+        .hero-badge i { font-size: 0.9rem; }
         
         .hero-content h1 { 
-            font-size: 5rem; 
-            margin-bottom: 20px; 
-            text-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-            line-height: 1.1;
+            font-size: clamp(2.8rem, 7vw, 5.5rem); 
+            margin-bottom: 25px;
+            color: #fff;
+        }
+        .hero-content h1 span { 
+            color: var(--secondary); 
+            font-style: italic;
         }
         
         .hero-content p { 
-            font-size: 1.4rem; 
-            max-width: 700px; 
-            margin: 0 auto 50px; 
-            opacity: 0.9; 
+            font-size: 1.2rem; 
+            max-width: 600px; 
+            margin: 0 auto 45px; 
+            opacity: 0.85; 
             font-weight: 300;
+            line-height: 1.8;
         }
         
         .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
         
         .btn {
-            padding: 18px 45px; border-radius: 50px; font-size: 1rem;
+            padding: 16px 40px; border-radius: 50px; font-size: 0.95rem;
             font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
-            display: inline-flex; align-items: center; gap: 10px;
+            display: inline-flex; align-items: center; gap: 12px;
             letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn-primary { 
-            background: linear-gradient(135deg, var(--secondary), #F4C430); 
-            color: var(--dark); 
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); 
+            background: var(--gradient-gold); 
+            color: var(--dark);
         }
         .btn-primary:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5); 
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold-lg);
         }
         
-        .btn-secondary { 
+        .btn-outline { 
             background: transparent; 
-            border: 2px solid rgba(255,255,255,0.8); 
-            color: #fff; 
+            border: 1.5px solid rgba(255,255,255,0.4); 
+            color: #fff;
+            backdrop-filter: blur(10px);
         }
-        .btn-secondary:hover { 
-            background: #fff; 
-            color: var(--primary); 
-            border-color: #fff;
+        .btn-outline:hover { 
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.6);
+            transform: translateY(-3px);
         }
 
-        /* Floating Booking Form - Premium Glass Look */
+        /* Hero Scroll Indicator */
+        .scroll-indicator {
+            position: absolute; bottom: 180px; left: 50%; transform: translateX(-50%);
+            z-index: 3;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .scroll-indicator .mouse {
+            width: 26px; height: 42px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 20px;
+            position: relative;
+        }
+        .scroll-indicator .wheel {
+            width: 4px; height: 8px;
+            background: var(--secondary);
+            border-radius: 2px;
+            position: absolute; top: 8px; left: 50%;
+            transform: translateX(-50%);
+            animation: scrollWheel 2s ease-in-out infinite;
+        }
+        @keyframes scrollWheel {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            50% { transform: translateX(-50%) translateY(10px); opacity: 0.3; }
+        }
+
+        /* Floating Booking Form */
         .booking-form-container {
-            position: absolute; bottom: 60px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 1200px; z-index: 4;
-            background: rgba(255, 255, 255, 0.85);
+            position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+            width: 94%; max-width: 1100px; z-index: 4;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            padding: 40px; border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            display: flex; flex-wrap: wrap; gap: 25px; align-items: flex-end;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 35px 40px; border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .booking-form-container::before {
+            content: '';
+            position: absolute; top: 0; left: 40px; right: 40px; height: 3px;
+            background: var(--gradient-gold);
+            border-radius: 3px;
         }
         
-        .form-group { flex: 1; min-width: 200px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 600; color: var(--primary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .form-control {
-            width: 100%; padding: 15px 20px; border: 2px solid transparent;
-            background: #fff;
-            border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: var(--transition);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        .form-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end; }
+        .form-group { flex: 1; min-width: 180px; }
+        .form-group label { 
+            display: block; margin-bottom: 10px; 
+            font-weight: 600; color: var(--primary); 
+            font-size: 0.75rem; text-transform: uppercase; 
+            letter-spacing: 1.5px; 
         }
-        .form-control:focus { outline: none; border-color: var(--secondary); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15); }
+        .form-control {
+            width: 100%; padding: 14px 18px; 
+            border: 2px solid #eee;
+            background: #fafafa;
+            border-radius: var(--radius-md); 
+            font-family: 'Inter', sans-serif; 
+            font-size: 0.95rem; 
+            transition: var(--transition);
+        }
+        .form-control:focus { 
+            outline: none; 
+            border-color: var(--secondary); 
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.1);
+        }
         
         .btn-submit {
-            padding: 15px 45px; background: linear-gradient(135deg, var(--primary), var(--dark));
-            color: #fff; border: none; border-radius: 10px; font-weight: 700;
-            cursor: pointer; font-size: 1rem; transition: var(--transition); height: 54px;
-            text-transform: uppercase; letter-spacing: 1px;
+            padding: 14px 35px; 
+            background: var(--gradient-dark);
+            color: #fff; border: none; 
+            border-radius: var(--radius-md); 
+            font-weight: 700;
+            cursor: pointer; font-size: 0.9rem; 
+            transition: var(--transition); 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            white-space: nowrap;
         }
-        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .btn-submit:hover { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-md);
+        }
 
         /* ============ SECTIONS ============ */
-        section { padding: 100px 5%; position: relative; }
+        section { padding: 120px 5%; position: relative; }
         
-        .section-title { text-align: center; margin-bottom: 80px; }
-        .section-title h2 { font-size: 3.5rem; color: var(--primary); position: relative; display: inline-block; padding-bottom: 20px; margin-bottom: 15px; }
-        .section-title h2::after {
-            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 4px; background: linear-gradient(90deg, transparent, var(--secondary), transparent); border-radius: 2px;
+        .section-header { text-align: center; margin-bottom: 80px; position: relative; }
+        .section-label {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-size: 0.75rem; font-weight: 600; 
+            color: var(--secondary); text-transform: uppercase;
+            letter-spacing: 3px; margin-bottom: 20px;
         }
-        .section-title p { color: var(--light-text); font-size: 1.2rem; max-width: 700px; margin: 0 auto; font-weight: 300; }
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px; height: 1px;
+            background: var(--secondary);
+        }
+        .section-header h2 { 
+            font-size: clamp(2.2rem, 5vw, 3.5rem); 
+            color: var(--primary); 
+            margin-bottom: 20px;
+        }
+        .section-header p { 
+            color: var(--light-text); 
+            font-size: 1.1rem; 
+            max-width: 600px; 
+            margin: 0 auto;
+            font-weight: 300;
+        }
 
         /* ============ ABOUT SECTION ============ */
-        .about-section { display: flex; align-items: center; gap: 80px; flex-wrap: wrap; background: #fff; }
-        .about-image { flex: 1; min-width: 300px; position: relative; }
-        .about-image img { width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); border: 5px solid #fff; }
-        .about-image::before { 
-            content: ''; position: absolute; top: -20px; left: -20px; width: 100%; height: 100%; 
-            border: 2px solid var(--secondary); border-radius: 20px; z-index: -1; 
+        .about-section { 
+            display: flex; 
+            align-items: center; 
+            gap: 80px; 
+            flex-wrap: wrap; 
+            background: #fff;
+            position: relative;
         }
-        .about-content { flex: 1; min-width: 300px; }
-        .about-content h2 { font-size: 3rem; color: var(--primary); margin-bottom: 30px; }
-        .about-content p { color: var(--light-text); margin-bottom: 25px; font-size: 1.1rem; line-height: 1.9; }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px; }
-        .stat-card { background: #fff; padding: 30px; border-radius: 15px; text-align: center; box-shadow: var(--shadow-md); transition: var(--transition); border-top: 3px solid transparent; }
-        .stat-card:hover { transform: translateY(-10px); border-top-color: var(--secondary); }
-        .stat-number { font-size: 3rem; color: var(--secondary); font-weight: 700; font-family: 'Amiri', serif; }
-        .stat-label { color: var(--primary); font-size: 1rem; margin-top: 5px; font-weight: 600; }
+        .about-image { 
+            flex: 1; 
+            min-width: 320px; 
+            position: relative; 
+        }
+        .about-image-wrapper {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+        }
+        .about-image-wrapper::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px solid var(--secondary);
+            border-radius: var(--radius-xl);
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .about-image img { 
+            width: 100%; 
+            border-radius: var(--radius-xl);
+            display: block;
+        }
+        .about-image::after {
+            content: '';
+            position: absolute; bottom: -20px; right: -20px;
+            width: 200px; height: 200px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            z-index: -1;
+        }
+        
+        .floating-badge {
+            position: absolute; bottom: 30px; left: -30px;
+            background: var(--gradient-gold);
+            color: var(--dark);
+            padding: 20px 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-gold);
+            text-align: center;
+            z-index: 2;
+        }
+        .floating-badge .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; font-weight: 700;
+            line-height: 1;
+        }
+        .floating-badge .text {
+            font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 600;
+        }
+        
+        .about-content { flex: 1; min-width: 320px; }
+        .about-content h2 { 
+            font-size: clamp(2rem, 4vw, 3rem); 
+            color: var(--primary); 
+            margin-bottom: 25px;
+        }
+        .about-content .lead {
+            color: var(--text);
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+        .about-content p { 
+            color: var(--light-text); 
+            margin-bottom: 20px; 
+            font-size: 1rem;
+        }
+        
+        .features-list {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 20px; margin-top: 40px;
+        }
+        .feature-item {
+            display: flex; align-items: center; gap: 15px;
+            padding: 15px; background: var(--accent);
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+        .feature-item:hover {
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+            transform: translateX(5px);
+        }
+        .feature-item i {
+            width: 40px; height: 40px;
+            background: var(--secondary);
+            color: var(--dark);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+        }
+        .feature-item span {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+        
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 25px; 
+            margin-top: 50px; 
+        }
+        .stat-card { 
+            background: #fff;
+            padding: 30px 20px; 
+            border-radius: var(--radius-lg); 
+            text-align: center; 
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+        .stat-card:hover { 
+            transform: translateY(-8px); 
+            border-bottom-color: var(--secondary);
+            box-shadow: var(--shadow-md);
+        }
+        .stat-icon {
+            width: 50px; height: 50px;
+            background: var(--accent);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        .stat-number { 
+            font-size: 2.8rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+        }
+        .stat-label { 
+            color: var(--light-text); 
+            font-size: 0.85rem; 
+            margin-top: 8px; 
+            font-weight: 500;
+        }
 
         /* ============ SERVICES SECTION ============ */
-        .services-section { background: var(--light); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .service-card {
-            background: #fff; padding: 50px 35px; text-align: center; border-radius: 20px;
-            box-shadow: var(--shadow-sm); transition: var(--transition); position: relative; overflow: hidden;
-            border-bottom: 5px solid transparent;
+        .services-section { 
+            background: var(--accent);
+            position: relative;
         }
-        .service-card:hover { transform: translateY(-15px); border-bottom-color: var(--secondary); box-shadow: var(--shadow-lg); }
-        .service-icon { font-size: 4rem; color: var(--primary); margin-bottom: 25px; transition: var(--transition); display: inline-block; }
-        .service-card:hover .service-icon { color: var(--secondary); transform: rotateY(180deg); }
-        .service-card h3 { color: var(--primary); margin-bottom: 20px; font-size: 1.5rem; }
-        .service-card p { color: var(--light-text); line-height: 1.8; }
+        
+        .services-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 30px; 
+        }
+        .service-card {
+            background: #fff; 
+            padding: 45px 35px; 
+            border-radius: var(--radius-xl);
+            transition: var(--transition); 
+            position: relative; 
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--gradient-gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        .service-card:hover { 
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-color);
+        }
+        .service-card:hover::before { transform: scaleX(1); }
+        
+        .service-icon { 
+            width: 70px; height: 70px;
+            background: var(--accent);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; 
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        .service-card:hover .service-icon {
+            background: var(--gradient-gold);
+            color: var(--dark);
+            transform: rotate(-5deg);
+        }
+        .service-card h3 { 
+            color: var(--primary); 
+            margin-bottom: 15px; 
+            font-size: 1.4rem;
+        }
+        .service-card p { 
+            color: var(--light-text); 
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
 
         /* ============ PACKAGES SECTION ============ */
-        .packages-section { background: #fff; }
-        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
+        .packages-section { 
+            background: #fff;
+            position: relative;
+        }
+        
+        .packages-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); 
+            gap: 35px; 
+        }
         .package-card {
-            background: #fff; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-md);
-            transition: var(--transition); position: relative;
+            background: #fff; 
+            border-radius: var(--radius-xl); 
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition); 
+            position: relative;
+            border: 1px solid #eee;
         }
-        .package-card:hover { transform: translateY(-15px) scale(1.02); box-shadow: var(--shadow-lg); }
+        .package-card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: var(--shadow-lg);
+            border-color: var(--border-color);
+        }
+        .package-card.featured {
+            border: 2px solid var(--secondary);
+        }
+        .package-card.featured::before {
+            content: 'Most Popular';
+            position: absolute; top: 20px; right: -35px;
+            background: var(--gradient-gold);
+            color: var(--dark);
+            padding: 8px 45px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+        
         .package-header {
-            background: var(--primary);
-            color: #fff; padding: 40px 25px; text-align: center; position: relative; overflow: hidden;
+            background: var(--gradient-royal);
+            color: #fff; 
+            padding: 40px 35px; 
+            text-align: center;
+            position: relative;
         }
-        .package-badge {
-            display: inline-block; background: #fff; color: var(--primary);
-            padding: 8px 20px; border-radius: 50px; font-size: 0.8rem;
-            font-weight: 700; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;
+        .package-header::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.1), transparent);
         }
-        .package-header h3 { color: #fff; font-size: 2.2rem; margin: 10px 0; }
-        .package-duration { font-size: 1rem; opacity: 0.9; }
+        .package-icon {
+            width: 60px; height: 60px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            color: var(--secondary-light);
+        }
+        .package-header h3 { 
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        .package-duration { 
+            font-size: 0.9rem; 
+            opacity: 0.8;
+            font-weight: 300;
+        }
         
-        .package-body { padding: 40px; }
-        .package-price { font-size: 2.8rem; color: var(--primary); font-weight: 700; margin-bottom: 30px; font-family: 'Amiri', serif; }
-        .package-price span { font-size: 1.2rem; color: var(--light-text); font-family: 'Poppins', sans-serif; font-weight: 400; }
+        .package-body { padding: 35px; }
+        .package-price { 
+            font-size: 2.4rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+        }
+        .package-price span { 
+            font-size: 1rem; 
+            color: var(--muted);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
         
-        .features { list-style: none; margin-bottom: 30px; }
+        .features { 
+            list-style: none; 
+            margin-bottom: 30px; 
+        }
         .features li {
-            padding: 15px 0; border-bottom: 1px solid #eee;
-            color: var(--text); display: flex; align-items: center; gap: 15px;
+            padding: 12px 0;
+            color: var(--text); 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .features i { color: var(--secondary); font-size: 1.2rem; }
+        .features li:last-child { border-bottom: none; }
+        .features i { 
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .package-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .package-card:hover .package-btn {
+            background: var(--gradient-dark);
+            color: #fff;
+        }
 
         /* ============ TESTIMONIALS SECTION ============ */
-        .testimonials-section { background: var(--light); }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-        .testimonial-card {
-            background: #fff; padding: 50px; border-radius: 20px; box-shadow: var(--shadow-sm);
-            transition: var(--transition); position: relative;
+        .testimonials-section { 
+            background: var(--accent);
+            position: relative;
         }
-        .testimonial-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-md); }
-        .quote-icon { position: absolute; top: 30px; right: 40px; font-size: 4rem; color: rgba(212, 175, 55, 0.1); margin-bottom: 0; }
-        .star-rating { color: var(--secondary); margin-bottom: 20px; font-size: 1.2rem; }
-        .testimonial-text { color: var(--light-text); font-size: 1.1rem; margin-bottom: 30px; line-height: 1.9; font-style: italic; }
-        .testimonial-author { display: flex; align-items: center; gap: 20px; }
+        
+        .testimonials-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 35px; 
+        }
+        .testimonial-card {
+            background: #fff; 
+            padding: 40px; 
+            border-radius: var(--radius-xl);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid transparent;
+        }
+        .testimonial-card:hover { 
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-color);
+        }
+        .quote-icon { 
+            position: absolute; 
+            top: 30px; right: 35px; 
+            font-size: 3rem; 
+            color: var(--accent);
+            opacity: 0.8;
+        }
+        .star-rating { 
+            color: var(--secondary); 
+            margin-bottom: 20px; 
+            font-size: 1rem;
+            letter-spacing: 3px;
+        }
+        .testimonial-text { 
+            color: var(--light-text); 
+            font-size: 1.05rem; 
+            margin-bottom: 30px; 
+            line-height: 1.9;
+            font-style: italic;
+        }
+        .testimonial-author { 
+            display: flex; 
+            align-items: center; 
+            gap: 18px; 
+        }
         .author-avatar {
-            width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-weight: 700; font-size: 1.4rem;
+            width: 55px; height: 55px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .author-info h4 {
+            color: var(--text);
+            font-size: 1rem;
+            margin-bottom: 3px;
+        }
+        .author-info p {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            background: var(--gradient-royal);
+            padding: 100px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='1' fill='%23c9a227' fill-opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 50px 50px;
+        }
+        .cta-content {
+            position: relative;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #fff;
+        }
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .cta-content h2 span {
+            color: var(--secondary);
+        }
+        .cta-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 35px;
+            font-weight: 300;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         /* ============ FOOTER ============ */
-        footer { background: var(--dark); color: #fff; padding: 80px 5% 40px; position: relative; }
+        footer { 
+            background: var(--darker); 
+            color: #fff; 
+            padding: 80px 5% 40px;
+            position: relative;
+        }
         footer::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
-            background: linear-gradient(90deg, var(--secondary), #F4C430, var(--secondary));
+            content: ''; 
+            position: absolute; 
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient-gold);
         }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px; margin-bottom: 60px; }
-        .footer-col h3 { color: #fff; margin-bottom: 30px; font-size: 1.5rem; }
-        .footer-col p, .footer-col a { color: rgba(255,255,255,0.7); margin-bottom: 15px; display: block; }
-        .footer-col a:hover { color: var(--secondary); padding-left: 8px; }
-        .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 40px; text-align: center; color: rgba(255,255,255,0.5); }
-        .social-icons { display: flex; gap: 20px; margin-top: 30px; }
+        
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 50px; 
+            margin-bottom: 60px; 
+        }
+        .footer-col h3 { 
+            color: #fff; 
+            margin-bottom: 25px; 
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .footer-col h3::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0;
+            width: 40px; height: 2px;
+            background: var(--secondary);
+        }
+        .footer-col p { 
+            color: rgba(255,255,255,0.6); 
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .footer-col a { 
+            color: rgba(255,255,255,0.6); 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .footer-col a:hover { 
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom { 
+            border-top: 1px solid rgba(255, 255, 255, 0.08); 
+            padding-top: 40px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-bottom p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+        
+        .social-icons { 
+            display: flex; 
+            gap: 15px;
+        }
         .social-icons a {
-            width: 50px; height: 50px; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem;
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            transition: var(--transition);
         }
-        .social-icons a:hover { background: var(--secondary); border-color: var(--secondary); color: var(--dark); }
+        .social-icons a:hover { 
+            background: var(--secondary);
+            border-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
 
         /* ============ FLOATING BUTTONS ============ */
         .whatsapp-btn {
-            position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
-            background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 2.2rem; z-index: 999; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            animation: pulse-wp 2s infinite;
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.8rem;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
         }
-        @keyframes pulse-wp {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
         }
         
         .back-to-top {
-            position: fixed; bottom: 40px; right: 115px; width: 55px; height: 55px;
-            background: var(--primary); border: none;
-            border-radius: 50%; color: #fff; font-size: 1.2rem; cursor: pointer;
-            z-index: 999; box-shadow: var(--shadow-md); opacity: 0; visibility: hidden; transition: var(--transition);
+            position: fixed; bottom: 30px; right: 100px;
+            width: 50px; height: 50px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: var(--shadow-md);
+            opacity: 0; visibility: hidden;
+            transition: var(--transition);
         }
         .back-to-top.show { opacity: 1; visibility: visible; }
-        .back-to-top:hover { background: var(--secondary); color: var(--dark); }
+        .back-to-top:hover { 
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
 
         /* ============ MODAL ============ */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center;
-            align-items: center; backdrop-filter: blur(10px);
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            padding: 20px;
         }
-        .modal.active { display: flex; animation: fadeIn 0.3s ease; }
+        .modal.active { 
+            display: flex; 
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         .modal-content {
-            background: #fff; padding: 60px; border-radius: 25px; width: 90%;
-            max-width: 550px; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            background: #fff;
+            padding: 50px 45px;
+            border-radius: var(--radius-xl);
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-xl);
             position: relative;
+            animation: modalSlideUp 0.4s ease;
+        }
+        @keyframes modalSlideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-content::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: var(--gradient-gold);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         }
         .close-btn {
-            position: absolute; top: 20px; right: 25px; background: none;
-            border: none; font-size: 2.5rem; color: #ccc; cursor: pointer; transition: var(--transition);
+            position: absolute;
+            top: 20px; right: 20px;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--muted);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
         }
-        .close-btn:hover { color: var(--primary); transform: rotate(90deg); }
-        .modal h2 { color: var(--primary); margin-bottom: 30px; font-size: 2.2rem; text-align: center; }
+        .close-btn:hover { 
+            color: var(--primary);
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+        .modal h2 { 
+            color: var(--primary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .modal .form-group { margin-bottom: 20px; }
 
         /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .hero-content h1 { font-size: 3.5rem; }
+            .about-section { gap: 50px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
+            .cursor, .cursor-follower { display: none; }
+            
             .nav-links {
-                display: none; position: absolute; top: 100%; left: 0; width: 100%;
-                background: #fff; flex-direction: column; padding: 30px; gap: 20px;
-                box-shadow: var(--shadow-lg); border-radius: 0 0 20px 20px;
+                display: none;
+                position: fixed;
+                top: 0; left: 0; width: 100%; height: 100vh;
+                background: var(--primary);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                z-index: 1000;
             }
             .nav-links.active { display: flex; }
-            .navbar.scrolled .nav-links a, .nav-links a { color: var(--text); }
-            .menu-toggle { display: flex; }
-            
-            .hero-content h1 { font-size: 3rem; }
-            .hero-content p { font-size: 1.1rem; }
-            .booking-form-container { 
-                position: relative; bottom: auto; transform: translateX(0); 
-                margin-top: -80px; border-radius: 20px;
-                padding: 30px; 
+            .nav-links a { 
+                color: #fff !important;
+                font-size: 1.3rem;
             }
+            .navbar.scrolled .nav-btn { 
+                display: none;
+            }
+            .nav-btn { display: none; }
+            .menu-toggle { 
+                display: flex; 
+                position: relative;
+                z-index: 1001;
+            }
+            .menu-toggle.active span { background: #fff !important; }
+            
+            .hero { min-height: 600px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1rem; }
+            
+            .scroll-indicator { display: none; }
+            
+            .booking-form-container {
+                position: relative;
+                bottom: auto;
+                transform: none;
+                margin-top: -50px;
+                border-radius: var(--radius-lg);
+                padding: 25px 20px;
+            }
+            .booking-form-container::before { left: 20px; right: 20px; }
+            .form-row { flex-direction: column; }
+            .form-group { min-width: 100%; }
             .btn-submit { width: 100%; }
             
-            .stats-grid { grid-template-columns: 1fr; }
-            .section-title h2 { font-size: 2.5rem; }
+            .features-list { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; gap: 15px; }
             
-            .whatsapp-btn { width: 55px; height: 55px; font-size: 1.8rem; bottom: 20px; right: 20px; }
-            .back-to-top { bottom: 20px; right: 85px; width: 50px; height: 50px; }
+            .packages-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            
+            section { padding: 80px 5%; }
+            
+            .whatsapp-btn { 
+                width: 50px; height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px; right: 20px;
+            }
+            .back-to-top { 
+                bottom: 20px; right: 80px;
+                width: 45px; height: 45px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .modal-content { padding: 40px 25px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .section-header h2 { font-size: 1.8rem; }
+            .about-image::after { display: none; }
+            .floating-badge { position: relative; bottom: auto; left: auto; margin-top: 20px; }
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Pattern Overlay -->
+    <div class="pattern-overlay"></div>
+
     <!-- Preloader -->
     <div id="preloader">
-        <div class="preloader-content">
-            <div class="spinner"></div>
-            <p class="preloader-text">Preparing Your Journey</p>
+        <div class="preloader-logo">
+            <span>☪</span>
+        </div>
+        <p class="preloader-text">Preparing Your Journey</p>
+        <div class="preloader-bar">
+            <div class="preloader-bar-fill"></div>
         </div>
     </div>
 
@@ -468,232 +1334,356 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#packages">Packages</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <button class="nav-btn" onclick="openBookingModal()">Book Now</button>
-        <button class="menu-toggle" onclick="toggleMenu()">
+        <button class="nav-btn magnetic-btn" onclick="openBookingModal()">Book Now</button>
+        <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </button>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-slide"></div>
-        <div class="hero-slide"></div>
-        <div class="hero-slide"></div>
+        <div class="hero-slides">
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+            <div class="hero-slide"></div>
+        </div>
         <div class="hero-overlay"></div>
+        
+        <!-- Floating Particles -->
+        <div class="particles" id="particles"></div>
 
         <div class="hero-content">
-            <span class="hero-badge">Established Since 1998</span>
-            <h1>Your Sacred Journey<br>Of A Lifetime</h1>
-            <p>Experience the spiritual fulfillment of Hajj & Umrah with 25+ years of premier service and dedication.</p>
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                <span>25+ Years of Excellence</span>
+                <i class="fas fa-star"></i>
+            </div>
+            <h1>Your Sacred <span>Journey</span> Awaits</h1>
+            <p>Experience the spiritual fulfillment of Hajj & Umrah with our premium pilgrimage services. Let us transform your sacred journey into an unforgettable experience.</p>
             <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="openBookingModal()">
+                <button class="btn btn-primary magnetic-btn" onclick="openBookingModal()">
                     <i class="fas fa-paper-plane"></i> Start Your Journey
                 </button>
-                <button class="btn btn-secondary" onclick="document.getElementById('packages').scrollIntoView()">
+                <button class="btn btn-outline magnetic-btn" onclick="document.getElementById('packages').scrollIntoView({behavior: 'smooth'})">
                     <i class="fas fa-eye"></i> View Packages
                 </button>
             </div>
         </div>
 
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <span>Scroll Down</span>
+        </div>
+
         <!-- Floating Booking Form -->
         <div class="booking-form-container">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" class="form-control" placeholder="Enter Your Name">
-            </div>
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" class="form-control" placeholder="+92 300 XXXXXXX">
-            </div>
-            <div class="form-group">
-                <label>Package Type</label>
-                <select class="form-control">
-                    <option>Select Package</option>
-                    <option>Hajj Package</option>
-                    <option>Umrah Package</option>
-                    <option>Ramzan Special</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button class="btn-submit">Send Inquiry</button>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" class="form-control" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" class="form-control" placeholder="+92 300 XXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Package Type</label>
+                    <select class="form-control">
+                        <option value="">Select Package</option>
+                        <option value="hajj">Hajj Package</option>
+                        <option value="umrah">Umrah Package</option>
+                        <option value="ramzan">Ramzan Special</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn-submit">Send Inquiry</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about-section">
-        <div class="about-image" data-aos="fade-right">
-            <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&h=700&fit=crop" alt="Pilgrims">
+        <div class="section-border top"></div>
+        
+        <div class="about-image" data-aos="fade-right" data-aos-duration="1200">
+            <div class="about-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&h=700&fit=crop" alt="Pilgrims at Masjid al-Haram">
+            </div>
+            <div class="floating-badge">
+                <div class="number">25+</div>
+                <div class="text">Years</div>
+            </div>
         </div>
-        <div class="about-content" data-aos="fade-left">
+        
+        <div class="about-content" data-aos="fade-left" data-aos-duration="1200">
+            <div class="section-label">About Us</div>
             <h2>Why Choose Sana Tours?</h2>
-            <p>With a legacy spanning over two decades, Sana Tours & Travels stands as a beacon of trust and excellence in pilgrimage services. We are a government-authorized agency committed to transforming your spiritual journey into a seamless, comfortable, and memorable experience.</p>
-            <p>Our dedicated team handles every intricate detail—from visa documentation to premium accommodation—allowing you to focus solely on your spiritual devotion.</p>
+            <p class="lead">A legacy of trust and excellence in pilgrimage services since 1998.</p>
+            <p>With over two decades of dedicated service, Sana Tours & Travels stands as a beacon of reliability in the pilgrimage industry. We are a government-authorized agency committed to transforming your spiritual journey into a seamless, comfortable, and deeply meaningful experience.</p>
+            <p>Our expert team handles every intricate detail—from visa documentation to premium accommodation—allowing you to focus solely on your spiritual devotion and connection with the divine.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Govt. Authorized Agent</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-hotel"></i>
+                    <span>Premium Hotels</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-users"></i>
+                    <span>Expert Scholars</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <span>24/7 Support</span>
+                </div>
+            </div>
             
             <div class="stats-grid">
-                <div class="stat-card" data-aos="fade-up">
-                    <div class="stat-number">25+</div>
-                    <div class="stat-label">Years Experience</div>
-                </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="stat-number">15K+</div>
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-number" data-count="15000">0</div>
                     <div class="stat-label">Happy Pilgrims</div>
                 </div>
                 <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number">99%</div>
-                    <div class="stat-label">Satisfaction Rate</div>
+                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-number" data-count="99">0</div>
+                    <div class="stat-label">Satisfaction Rate %</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-icon"><i class="fas fa-award"></i></div>
+                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-label">Years Experience</div>
                 </div>
             </div>
         </div>
+        
+        <div class="section-border bottom"></div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services-section">
-        <div class="section-title" data-aos="fade-down">
-            <h2>Our Premium Services</h2>
-            <p>Comprehensive pilgrimage solutions designed for your comfort and peace of mind</p>
+        <div class="section-border top"></div>
+        
+        <div class="section-header" data-aos="fade-down">
+            <div class="section-label">Our Services</div>
+            <h2>Premium Pilgrimage Services</h2>
+            <p>Comprehensive solutions designed for your comfort, convenience, and peace of mind</p>
         </div>
+        
         <div class="services-grid">
-            <div class="service-card" data-aos="fade-up">
-                <i class="fas fa-passport service-icon"></i>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="service-icon"><i class="fas fa-passport"></i></div>
                 <h3>Visa Processing</h3>
-                <p>100% success rate with expert documentation handling and government liaison.</p>
+                <p>100% success rate with expert documentation handling and direct government liaison for hassle-free processing.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-concierge-bell service-icon"></i>
-                <h3>5-Star Accommodation</h3>
-                <p>Premium hotels within walking distance of the Haram for maximum convenience.</p>
+                <div class="service-icon"><i class="fas fa-hotel"></i></div>
+                <h3>Premium Accommodation</h3>
+                <p>5-star hotels within walking distance of the Haram, ensuring maximum convenience for your prayers.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-plane-departure service-icon"></i>
+                <div class="service-icon"><i class="fas fa-plane"></i></div>
                 <h3>Flight Booking</h3>
-                <p>Direct flights from major cities with optimal schedules and comfort.</p>
+                <p>Direct flights from major cities with optimal schedules, ensuring a comfortable journey to the holy lands.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                <i class="fas fa-book-quran service-icon"></i>
+                <div class="service-icon"><i class="fas fa-book-quran"></i></div>
                 <h3>Religious Guidance</h3>
-                <p>Accompanied by renowned Islamic scholars for spiritual enrichment.</p>
+                <p>Accompanied by renowned Islamic scholars who provide spiritual enrichment throughout your journey.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                <i class="fas fa-bus-alt service-icon"></i>
+                <div class="service-icon"><i class="fas fa-bus-alt"></i></div>
                 <h3>Ground Transport</h3>
-                <p>Luxury AC coaches and private vehicles for all transit needs.</p>
+                <p>Luxury air-conditioned coaches and private vehicles for all your transit needs between holy sites.</p>
             </div>
             <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                <i class="fas fa-headset service-icon"></i>
-                <h3>24/7 Support</h3>
-                <p>Dedicated support team available around the clock for assistance.</p>
+                <div class="service-icon"><i class="fas fa-concierge-bell"></i></div>
+                <h3>Concierge Service</h3>
+                <p>Dedicated support team available 24/7 to assist with any needs during your sacred journey.</p>
             </div>
         </div>
+        
+        <div class="section-border bottom"></div>
     </section>
 
     <!-- Packages Section -->
     <section id="packages" class="packages-section">
-        <div class="section-title" data-aos="fade-down">
-            <h2>Exclusive Packages</h2>
-            <p>Curated pilgrimage experiences tailored to your preferences</p>
+        <div class="section-border top"></div>
+        
+        <div class="section-header" data-aos="fade-down">
+            <div class="section-label">Packages</div>
+            <h2>Exclusive Pilgrimage Packages</h2>
+            <p>Curated experiences tailored to your preferences and spiritual aspirations</p>
         </div>
+        
         <div class="packages-grid">
             <!-- Silver Package -->
-            <div class="package-card" data-aos="fade-up">
-                <div class="package-header" style="background: linear-gradient(135deg, #3a3a3a, #1a1a1a);">
-                    <span class="package-badge">Economy</span>
+            <div class="package-card" data-aos="fade-up" data-aos-delay="0">
+                <div class="package-header">
+                    <div class="package-icon"><i class="fas fa-moon"></i></div>
                     <h3>Silver Umrah</h3>
-                    <div class="package-duration">14 Days</div>
+                    <div class="package-duration">14 Days Journey</div>
                 </div>
                 <div class="package-body">
-                    <div class="package-price">PKR 350,000</div>
+                    <div class="package-price">PKR 350,000 <span>/ person</span></div>
                     <ul class="features">
-                        <li><i class="fas fa-check"></i> 3-Star Hotel Near Haram</li>
-                        <li><i class="fas fa-check"></i> Breakfast Included</li>
-                        <li><i class="fas fa-check"></i> Group Transport</li>
-                        <li><i class="fas fa-check"></i> Islamic Scholar Guide</li>
-                        <li><i class="fas fa-check"></i> Visa Assistance</li>
+                        <li><i class="fas fa-check-circle"></i> 3-Star Hotel Near Haram</li>
+                        <li><i class="fas fa-check-circle"></i> Daily Breakfast Included</li>
+                        <li><i class="fas fa-check-circle"></i> Group Transport Provided</li>
+                        <li><i class="fas fa-check-circle"></i> Islamic Scholar Guide</li>
+                        <li><i class="fas fa-check-circle"></i> Complete Visa Processing</li>
                     </ul>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                    <button class="package-btn magnetic-btn" onclick="openBookingModal()">
+                        Book This Package
+                    </button>
                 </div>
             </div>
 
             <!-- Gold Package -->
-            <div class="package-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="package-card featured" data-aos="fade-up" data-aos-delay="150">
                 <div class="package-header">
-                    <span class="package-badge" style="background: var(--secondary); color: #000;">Recommended</span>
+                    <div class="package-icon"><i class="fas fa-crown"></i></div>
                     <h3>Gold Hajj</h3>
-                    <div class="package-duration">30 Days</div>
+                    <div class="package-duration">30 Days Journey</div>
                 </div>
                 <div class="package-body">
-                    <div class="package-price">PKR 1,200,000</div>
+                    <div class="package-price">PKR 1,200,000 <span>/ person</span></div>
                     <ul class="features">
-                        <li><i class="fas fa-check"></i> 5-Star Hotel (Haram View)</li>
-                        <li><i class="fas fa-check"></i> All Meals Included</li>
-                        <li><i class="fas fa-check"></i> Direct Flights</li>
-                        <li><i class="fas fa-check"></i> Senior Scholar Guide</li>
-                        <li><i class="fas fa-check"></i> Complete Ziarat Tours</li>
+                        <li><i class="fas fa-check-circle"></i> 5-Star Hotel (Haram View)</li>
+                        <li><i class="fas fa-check-circle"></i> All Meals Included</li>
+                        <li><i class="fas fa-check-circle"></i> Direct Flights</li>
+                        <li><i class="fas fa-check-circle"></i> Senior Scholar Guide</li>
+                        <li><i class="fas fa-check-circle"></i> Complete Ziarat Tours</li>
                     </ul>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                    <button class="package-btn magnetic-btn" onclick="openBookingModal()">
+                        Book This Package
+                    </button>
                 </div>
             </div>
 
             <!-- Platinum Package -->
-            <div class="package-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="package-header" style="background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);">
-                    <span class="package-badge" style="background: #000; color: #fff;">Luxury</span>
+            <div class="package-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="package-header" style="background: linear-gradient(135deg, #bf953f, #b38728, #fbf5b7, #aa771c);">
+                    <div class="package-icon"><i class="fas fa-gem"></i></div>
                     <h3 style="color: #000;">Platinum Hajj</h3>
-                    <div class="package-duration" style="color: #333;">35 Days</div>
+                    <div class="package-duration" style="color: #333;">35 Days Journey</div>
                 </div>
                 <div class="package-body">
-                    <div class="package-price">PKR 1,800,000</div>
+                    <div class="package-price">PKR 1,800,000 <span>/ person</span></div>
                     <ul class="features">
-                        <li><i class="fas fa-check"></i> Luxury 5-Star Suites</li>
-                        <li><i class="fas fa-check"></i> Gourmet Dining</li>
-                        <li><i class="fas fa-check"></i> Private VIP Transport</li>
-                        <li><i class="fas fa-check"></i> Personal Scholar</li>
-                        <li><i class="fas fa-check"></i> VIP Ziarat Experiences</li>
+                        <li><i class="fas fa-check-circle"></i> Luxury 5-Star Suites</li>
+                        <li><i class="fas fa-check-circle"></i> Gourmet Dining Experience</li>
+                        <li><i class="fas fa-check-circle"></i> Private VIP Transport</li>
+                        <li><i class="fas fa-check-circle"></i> Personal Scholar Guide</li>
+                        <li><i class="fas fa-check-circle"></i> VIP Ziarat Experiences</li>
                     </ul>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="openBookingModal()">Book Now</button>
+                    <button class="package-btn magnetic-btn" onclick="openBookingModal()">
+                        Book This Package
+                    </button>
                 </div>
             </div>
         </div>
+        
+        <div class="section-border bottom"></div>
     </section>
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
-        <div class="section-title" data-aos="fade-down">
+        <div class="section-border top"></div>
+        
+        <div class="section-header" data-aos="fade-down">
+            <div class="section-label">Testimonials</div>
             <h2>Pilgrim Experiences</h2>
-            <p>Hear from our valued travelers about their spiritual journeys</p>
+            <p>Hear from our valued travelers about their transformative spiritual journeys</p>
         </div>
+        
         <div class="testimonials-grid">
-            <div class="testimonial-card" data-aos="fade-up">
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="0">
                 <i class="fas fa-quote-right quote-icon"></i>
-                <div class="star-rating">★★★★★</div>
-                <p class="testimonial-text">"Alhamdulillah, Sana Tours made our Hajj journey absolutely seamless. The arrangements were impeccable, and the scholars were incredibly knowledgeable."</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Alhamdulillah, Sana Tours made our Hajj journey absolutely seamless. The arrangements were impeccable, and the scholars provided invaluable guidance throughout our pilgrimage."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">MA</div>
-                    <div class="author-info"><h4>Muhammad Ahmed</h4><p>Hajj 2023</p></div>
+                    <div class="author-info">
+                        <h4>Muhammad Ahmed</h4>
+                        <p>Hajj 2023</p>
+                    </div>
                 </div>
             </div>
-            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+            
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="150">
                 <i class="fas fa-quote-right quote-icon"></i>
-                <div class="star-rating">★★★★★</div>
-                <p class="testimonial-text">"Our family Umrah trip was perfectly organized. The hotel was walking distance from Haram, and the staff was always available for assistance."</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"Our family Umrah trip was perfectly organized. The hotel was within walking distance of Haram, and the staff was always available for any assistance we needed."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">FK</div>
-                    <div class="author-info"><h4>Fatima Khan</h4><p>Umrah 2024</p></div>
+                    <div class="author-info">
+                        <h4>Fatima Khan</h4>
+                        <p>Umrah 2024</p>
+                    </div>
                 </div>
             </div>
-            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+            
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
                 <i class="fas fa-quote-right quote-icon"></i>
-                <div class="star-rating">★★★★★</div>
-                <p class="testimonial-text">"The Ramzan Umrah package exceeded all expectations. The night prayers in Haram were spiritually uplifting and transformative."</p>
+                <div class="star-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-text">"The Ramzan Umrah package exceeded all expectations. The night prayers in Haram were spiritually uplifting. Highly recommend their services to everyone."</p>
                 <div class="testimonial-author">
                     <div class="author-avatar">AR</div>
-                    <div class="author-info"><h4>Abdul Rahman</h4><p>Ramzan 2024</p></div>
+                    <div class="author-info">
+                        <h4>Abdul Rahman</h4>
+                        <p>Ramzan 2024</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+        
+        <div class="section-border bottom"></div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content" data-aos="fade-up">
+            <h2>Begin Your <span>Sacred Journey</span> Today</h2>
+            <p>Let us help you fulfill your spiritual aspirations with our premium pilgrimage services. Contact us now to plan your unforgettable journey.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary magnetic-btn" onclick="openBookingModal()">
+                    <i class="fas fa-paper-plane"></i> Book Now
+                </button>
+                <a href="tel:+923001234567" class="btn btn-outline magnetic-btn">
+                    <i class="fas fa-phone"></i> Call Us
+                </a>
             </div>
         </div>
     </section>
@@ -703,7 +1693,7 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h3>Sana Tours & Travels</h3>
-                <p>Government Authorized Agent providing premium pilgrimage services with dedication and excellence since 1998.</p>
+                <p>Government Authorized Agent providing premium pilgrimage services with dedication and excellence since 1998. Your trusted partner for Hajj & Umrah journeys.</p>
                 <div class="social-icons">
                     <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -713,28 +1703,38 @@
             </div>
             <div class="footer-col">
                 <h3>Quick Links</h3>
-                <a href="#home">Home</a>
-                <a href="#about">About Us</a>
-                <a href="#packages">Packages</a>
-                <a href="#contact">Contact</a>
+                <a href="#home"><i class="fas fa-angle-right"></i> Home</a>
+                <a href="#about"><i class="fas fa-angle-right"></i> About Us</a>
+                <a href="#services"><i class="fas fa-angle-right"></i> Services</a>
+                <a href="#packages"><i class="fas fa-angle-right"></i> Packages</a>
+                <a href="#testimonials"><i class="fas fa-angle-right"></i> Testimonials</a>
+            </div>
+            <div class="footer-col">
+                <h3>Our Packages</h3>
+                <a href="#packages"><i class="fas fa-angle-right"></i> Silver Umrah</a>
+                <a href="#packages"><i class="fas fa-angle-right"></i> Gold Hajj</a>
+                <a href="#packages"><i class="fas fa-angle-right"></i> Platinum Hajj</a>
+                <a href="#packages"><i class="fas fa-angle-right"></i> Ramzan Special</a>
             </div>
             <div class="footer-col">
                 <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Plaza, Main Boulevard, Lahore</p>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Travel Plaza, Main Boulevard, Lahore, Pakistan</p>
                 <p><i class="fas fa-phone"></i> +92 300 1234567</p>
                 <p><i class="fas fa-envelope"></i> info@sanatours.pk</p>
+                <p><i class="fas fa-clock"></i> Mon - Sat: 9:00 AM - 8:00 PM</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Sana Tours & Travels. All Rights Reserved.</p>
+            <p>&copy; 2024 Sana Tours & Travels. All Rights Reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for Pilgrims</p>
         </div>
     </footer>
 
     <!-- Floating Buttons -->
-    <a href="https://wa.me/923001234567" class="whatsapp-btn" target="_blank" title="Chat on WhatsApp">
+    <a href="https://wa.me/923001234567" class="whatsapp-btn magnetic-btn" target="_blank" title="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
-    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to Top">
+    <button class="back-to-top magnetic-btn" id="backToTop" onclick="scrollToTop()" title="Back to Top">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -742,7 +1742,7 @@
     <div class="modal" id="bookingModal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeBookingModal()">&times;</button>
-            <h2>Book Your Journey</h2>
+            <h2>Book Your Sacred Journey</h2>
             <form onsubmit="submitBooking(event)">
                 <div class="form-group">
                     <label>Full Name *</label>
@@ -765,8 +1765,8 @@
                         <option value="platinum">Platinum Hajj - PKR 1,800,000</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
-                    Submit Inquiry
+                <button type="submit" class="btn btn-primary magnetic-btn" style="width: 100%; margin-top: 10px;">
+                    <i class="fas fa-paper-plane"></i> Submit Inquiry
                 </button>
             </form>
         </div>
@@ -776,56 +1776,208 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     
     <script>
+        // ============ INITIALIZATION ============
+        document.addEventListener('DOMContentLoaded', function() {
+            initAOS();
+            initCustomCursor();
+            initParticles();
+            initScrollEffects();
+            initCounterAnimation();
+            initMagneticButtons();
+        });
+
         // Initialize AOS
-        AOS.init({
-            duration: 1200, // Slower, more elegant animations
-            offset: 100,
-            once: true
-        });
+        function initAOS() {
+            AOS.init({
+                duration: 800,
+                offset: 100,
+                once: true,
+                easing: 'ease-out-cubic'
+            });
+        }
 
-        // Preloader
-        window.addEventListener('load', () => {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                setTimeout(() => { // Slight delay for effect
-                    preloader.classList.add('loaded');
-                }, 500);
+        // ============ CUSTOM CURSOR ============
+        function initCustomCursor() {
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
+            
+            if (!cursor || !follower) return;
+            if (window.innerWidth <= 768) return;
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let followerX = 0, followerY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX = mouseX;
+                cursorY = mouseY;
+                followerX += (mouseX - followerX) * 0.15;
+                followerY += (mouseY - followerY) * 0.15;
+
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                follower.style.left = followerX + 'px';
+                follower.style.top = followerY + 'px';
+
+                requestAnimationFrame(animateCursor);
             }
-        });
+            animateCursor();
 
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+            // Hover effects
+            const hoverElements = document.querySelectorAll('a, button, .service-card, .package-card, .testimonial-card, .stat-card');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                    follower.classList.add('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                    follower.classList.remove('hover');
+                });
+            });
+        }
+
+        // ============ PARTICLES ============
+        function initParticles() {
+            const container = document.getElementById('particles');
+            if (!container) return;
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
             }
+        }
 
-            // Back to Top Button Visibility
+        // ============ SCROLL EFFECTS ============
+        function initScrollEffects() {
+            const navbar = document.getElementById('navbar');
             const backToTop = document.getElementById('backToTop');
-            if (window.scrollY > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
+            const scrollProgress = document.getElementById('scrollProgress');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollY / docHeight) * 100;
+
+                // Navbar
+                if (scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // Back to top
+                if (scrollY > 500) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+
+                // Scroll progress
+                if (scrollProgress) {
+                    scrollProgress.style.width = scrollPercent + '%';
+                }
+            });
+        }
+
+        // ============ COUNTER ANIMATION ============
+        function initCounterAnimation() {
+            const counters = document.querySelectorAll('.stat-number[data-count]');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        animateCounter(counter, target);
+                        observer.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 60;
+            const duration = 2000;
+            const stepTime = duration / 60;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString() + (target === 99 ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, stepTime);
+        }
+
+        // ============ MAGNETIC BUTTONS ============
+        function initMagneticButtons() {
+            const buttons = document.querySelectorAll('.magnetic-btn');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
+        }
+
+        // ============ PRELOADER ============
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.classList.add('loaded');
+                }
+            }, 2200);
         });
 
-        // Scroll to Top Function
+        // ============ MOBILE MENU ============
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const menuToggle = document.getElementById('menuToggle');
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                document.getElementById('menuToggle').classList.remove('active');
+            });
+        });
+
+        // ============ SCROLL TO TOP ============
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mobile Menu Toggle
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Modal Controls
+        // ============ MODAL CONTROLS ============
         function openBookingModal() {
             document.getElementById('bookingModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeBookingModal() {
@@ -833,20 +1985,52 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside content
+        // Close modal on outside click
         document.getElementById('bookingModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeBookingModal();
             }
         });
 
-        // Form Submission Handler
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeBookingModal();
+            }
+        });
+
+        // ============ FORM SUBMISSION ============
         function submitBooking(event) {
             event.preventDefault();
-            alert('Thank you for your inquiry! We will contact you shortly to confirm your sacred journey.');
-            closeBookingModal();
-            event.target.reset();
+            
+            // Show success message
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Inquiry Sent!';
+            btn.style.background = '#10b981';
+            
+            setTimeout(() => {
+                alert('Thank you for your inquiry! We will contact you shortly to confirm your sacred journey.');
+                closeBookingModal();
+                event.target.reset();
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 1000);
         }
+
+        // ============ SMOOTH SCROLL FOR ANCHOR LINKS ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
